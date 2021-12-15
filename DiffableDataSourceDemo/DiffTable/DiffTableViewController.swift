@@ -42,6 +42,7 @@ final class DiffTableViewController: UITableViewController {
                                                         target: self,
                                                         action: #selector(DiffTableViewController.onDiff))
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+    setupTable()
   }
 
   @objc func onDiff() {
@@ -49,6 +50,8 @@ final class DiffTableViewController: UITableViewController {
     let to = usingOldPeople ? newPeople : oldPeople
     usingOldPeople = !usingOldPeople
     people = to
+
+    populatedItems(with: people)
 
     //let result = ListDiffPaths(fromSection: 0, toSection: 0, oldArray: from, newArray: to, option: .equality).forBatchUpdates()
 
@@ -61,25 +64,42 @@ final class DiffTableViewController: UITableViewController {
 
   // MARK: UITableViewDataSource
 
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return people.count
+//  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//    return people.count
+//  }
+//
+//  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//    let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+//    cell.textLabel?.text = people[indexPath.row].name
+//    return cell
+//  }
+  private func setupTable() {
+    tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier) // 1
+    setupDataSource() // 2
+    populatedItems(with: oldPeople) // 3
   }
 
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-    cell.textLabel?.text = people[indexPath.row].name
-    return cell
+  typealias DataSource = UITableViewDiffableDataSource<Section, Person>
+  typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Person>
+
+  private var dataSource: DataSource?
+
+  private let reuseIdentifier = "cell"
+
+  private func setupDataSource() {
+    dataSource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { (tv, index, item) -> UITableViewCell? in
+      let cell = tv.dequeueReusableCell(withIdentifier: self.reuseIdentifier, for: index)
+      cell.textLabel?.text = item.name
+      cell.accessoryType = .disclosureIndicator
+      return cell
+    })
+  }
+
+  private func populatedItems(with model: [Person]) {
+    var snapshot = Snapshot()
+    snapshot.appendSections([.main])
+    snapshot.appendItems(model)
+    dataSource?.apply(snapshot)
   }
 
 }
-
-struct Person {
-  let pk: Int
-  let name: String
-
-  init(pk: Int, name: String) {
-    self.pk = pk
-    self.name = name
-  }
-}
-
