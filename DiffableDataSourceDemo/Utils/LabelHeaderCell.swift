@@ -23,7 +23,7 @@ final class LabelHeaderCell: UICollectionReusableView {
 
   override init(frame: CGRect) {
     super.init(frame: frame)
-    backgroundColor = .systemGroupedBackground
+    backgroundColor = .secondarySystemBackground
     addSubview(titleLabel)
     configureConstraints()
   }
