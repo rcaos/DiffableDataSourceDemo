@@ -28,6 +28,7 @@ class SuplementaryViewsController: UIViewController {
   }
 
   private func setupCollection() {
+    collectionView.register(LabelHeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: reuseHeaderIdentifier) // A
     collectionView.register(LabelCell.self, forCellWithReuseIdentifier: reuseIdentifier) // 1
     collectionView.delegate = self
     setupDataSource()
@@ -41,6 +42,7 @@ class SuplementaryViewsController: UIViewController {
   private var dataSource: DataSource?
 
   private let reuseIdentifier = "reuseTableIdentifier"
+  private let reuseHeaderIdentifier = "reuseHeaderTableIdentifier"
 
   private func setupDataSource() {
     // Here the connection happens.
@@ -49,6 +51,29 @@ class SuplementaryViewsController: UIViewController {
     dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { [weak self] cv, index, model in
       self?.configureCell(collectionView: cv, index: index, item: model)
     })
+
+    // B
+    dataSource?.supplementaryViewProvider = { collectionView, kind, index in
+      guard kind == UICollectionView.elementKindSectionHeader else {
+        return nil
+      }
+
+      let view = collectionView.dequeueReusableSupplementaryView(
+        ofKind: kind,
+        withReuseIdentifier: self.reuseHeaderIdentifier,
+        for: index) as? LabelHeaderCell
+
+      let section = self.dataSource?.snapshot().sectionIdentifiers[index.section]
+
+      switch section {
+      case .user(let user):
+        view?.titleLabel.text = user.name
+      case .none:
+        break
+      }
+
+      return view
+    }
   }
 
   private func configureCell(collectionView: UICollectionView, index: IndexPath, item: Comment) -> UICollectionViewCell? {
@@ -87,6 +112,11 @@ class SuplementaryViewsController: UIViewController {
 extension SuplementaryViewsController: UICollectionViewDelegateFlowLayout {
 
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    return CGSize(width: collectionView.frame.width, height: 50)
+  }
+
+  // C
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
     return CGSize(width: collectionView.frame.width, height: 50)
   }
 }
