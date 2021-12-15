@@ -39,7 +39,7 @@ class DemosViewController: UIViewController {
 
   private var dataSource: DataSource?
 
-  private let reuseIdentifier = "tableIdentifier"
+  private let reuseIdentifier = "reuseTableIdentifier"
 
   private func setupDataSource() {
     dataSource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { (tv, index, item) -> UITableViewCell? in
