@@ -46,13 +46,17 @@ class SuplementaryViewsController: UIViewController {
     // Here the connection happens.
     // The Diffable with the global tableView 👇
     // 2
-    dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { (cv, index, item) -> UICollectionViewCell? in
-      guard let cell = cv.dequeueReusableCell(withReuseIdentifier: self.reuseIdentifier, for: index) as? LabelCell else {
-        fatalError()
-      }
-      cell.text = item.comment
-      return cell
+    dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { [weak self] cv, index, model in
+      self?.configureCell(collectionView: cv, index: index, item: model)
     })
+  }
+
+  private func configureCell(collectionView: UICollectionView, index: IndexPath, item: Comment) -> UICollectionViewCell? {
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: index) as? LabelCell else {
+      fatalError()
+    }
+    cell.text = item.comment
+    return cell
   }
 
   let feedItems = [
