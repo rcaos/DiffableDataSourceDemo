@@ -53,26 +53,8 @@ class SuplementaryViewsController: UIViewController {
     })
 
     // B
-    dataSource?.supplementaryViewProvider = { collectionView, kind, index in
-      guard kind == UICollectionView.elementKindSectionHeader else {
-        return nil
-      }
-
-      let view = collectionView.dequeueReusableSupplementaryView(
-        ofKind: kind,
-        withReuseIdentifier: self.reuseHeaderIdentifier,
-        for: index) as? LabelHeaderCell
-
-      let section = self.dataSource?.snapshot().sectionIdentifiers[index.section]
-
-      switch section {
-      case .user(let user):
-        view?.titleLabel.text = user.name
-      case .none:
-        break
-      }
-
-      return view
+    dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
+      self?.configureSupplementaryView(collectionView: collectionView, ofKind: kind, for: indexPath)
     }
   }
 
@@ -82,6 +64,28 @@ class SuplementaryViewsController: UIViewController {
     }
     cell.text = item.comment
     return cell
+  }
+
+  func configureSupplementaryView(collectionView: UICollectionView, ofKind elementKind: String, for indexPath: IndexPath) -> UICollectionReusableView? {
+    guard elementKind == UICollectionView.elementKindSectionHeader else {
+      return nil
+    }
+
+    let view = collectionView.dequeueReusableSupplementaryView(
+      ofKind: elementKind,
+      withReuseIdentifier: self.reuseHeaderIdentifier,
+      for: indexPath) as? LabelHeaderCell
+
+    let section = self.dataSource?.snapshot().sectionIdentifiers[indexPath.section]
+
+    switch section {
+    case .user(let user):
+      view?.titleLabel.text = user.name
+    case .none:
+      break
+    }
+
+    return view
   }
 
   let feedItems = [
