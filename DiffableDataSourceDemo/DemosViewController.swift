@@ -39,6 +39,7 @@ class DemosViewController: UIViewController {
   typealias DataSource = UITableViewDiffableDataSource<Section, DemoItem>
   typealias Snapshot = NSDiffableDataSourceSnapshot<Section, DemoItem>
 
+  // 0: I need a Strong Reference to a UITableViewDiffableDataSource
   private var dataSource: DataSource?
 
   private let reuseIdentifier = "reuseTableIdentifier"
@@ -70,10 +71,20 @@ class DemosViewController: UIViewController {
 extension DemosViewController: UITableViewDelegate {
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let snapshot = dataSource?.snapshot()
-    let section = snapshot?.itemIdentifiers(inSection: .main) ?? []
-    let item = section[indexPath.row]
-    print("Has selected: [\(item)]")
-    navigationController?.pushViewController(item.viewType.getInstance(), animated: true)
+    guard let dataSource = dataSource else {
+      return
+    }
+
+    // Way #1
+//    let snapshot = dataSource.snapshot()
+//    let section = snapshot.itemIdentifiers(inSection: .main)
+//    let item = section[indexPath.row]
+//    print("Has selected: [\(item)]")
+
+    // Way #2
+    if let item = dataSource.itemIdentifier(for: indexPath) {
+      print("B: SelectedItem=[\(item)]")
+      navigationController?.pushViewController(item.viewType.getInstance(), animated: true)
+    }
   }
 }
