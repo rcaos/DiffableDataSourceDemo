@@ -43,6 +43,10 @@ final class DiffTableViewController: UITableViewController {
     setupTable()
   }
 
+  deinit {
+    print("\(Self.self)")
+  }
+
   private func setupNavigation() {
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .play,
                                                         target: self,
