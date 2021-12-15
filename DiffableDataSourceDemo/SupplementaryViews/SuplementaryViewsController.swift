@@ -67,7 +67,7 @@ class SuplementaryViewsController: UIViewController {
     FeedItem(pk: 3, user: User(pk: 102, name: "Ann", handle: "abaum"),
              comments: ["Good luck!"].map { .init(comment: $0) }),
     FeedItem(pk: 4, user: User(pk: 103, name: "Phil", handle: "phil"),
-             comments: ["yoooooooo", "What's the eta?"].map { .init(comment: $0) })
+             comments: ["yoooooooo", "What's the eta?", "Nothing", "Maybe", "Again", "Lose", "Fringe"].map { .init(comment: $0) })
   ]
 
   private func populatedItems() {
