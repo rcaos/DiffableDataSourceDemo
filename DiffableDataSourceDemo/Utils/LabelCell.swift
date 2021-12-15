@@ -73,9 +73,4 @@ final class LabelCell: UICollectionViewCell {
       contentView.backgroundColor = color
     }
   }
-  
-  //  override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-  //    super.traitCollectionDidChange(previousTraitCollection)
-  //    separator.backgroundColor = UIColor.separator.cgColor
-  //  }
 }
