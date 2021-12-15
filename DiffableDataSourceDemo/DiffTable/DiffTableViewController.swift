@@ -31,6 +31,7 @@ final class DiffTableViewController: UITableViewController {
     Person(pk: 4, name: "Jane"),
     Person(pk: 9, name: "Chen")
   ]
+
   lazy var people: [Person] = {
     return self.oldPeople
   }()
@@ -38,41 +39,24 @@ final class DiffTableViewController: UITableViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .play,
-                                                        target: self,
-                                                        action: #selector(DiffTableViewController.onDiff))
-    tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+    setupNavigation()
     setupTable()
   }
 
+  private func setupNavigation() {
+    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .play,
+                                                        target: self,
+                                                        action: #selector(onDiff))
+  }
+
   @objc func onDiff() {
-    let from = people
     let to = usingOldPeople ? newPeople : oldPeople
     usingOldPeople = !usingOldPeople
     people = to
 
     populatedItems(with: people)
-
-    //let result = ListDiffPaths(fromSection: 0, toSection: 0, oldArray: from, newArray: to, option: .equality).forBatchUpdates()
-
-//    tableView.beginUpdates()
-//    tableView.deleteRows(at: result.deletes, with: .fade)
-//    tableView.insertRows(at: result.inserts, with: .fade)
-//    result.moves.forEach { tableView.moveRow(at: $0.from, to: $0.to) }
-//    tableView.endUpdates()
   }
 
-  // MARK: UITableViewDataSource
-
-//  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//    return people.count
-//  }
-//
-//  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//    let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-//    cell.textLabel?.text = people[indexPath.row].name
-//    return cell
-//  }
   private func setupTable() {
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier) // 1
     setupDataSource() // 2
@@ -101,5 +85,4 @@ final class DiffTableViewController: UITableViewController {
     snapshot.appendItems(model)
     dataSource?.apply(snapshot)
   }
-
 }
