@@ -37,11 +37,14 @@ enum Section {
 // MARK: - Available scenes
 enum ViewScenes: String {
   case diffTable
+  case supplementaryViews
 
   func getInstance() -> UIViewController {
     switch self {
     case .diffTable:
       return DiffTableViewController()
+    case .supplementaryViews:
+      return SuplementaryViewsController()
     }
   }
 }

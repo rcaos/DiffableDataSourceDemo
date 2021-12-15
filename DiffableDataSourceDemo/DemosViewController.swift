@@ -12,8 +12,8 @@ class DemosViewController: UIViewController {
   let tableView = UITableView(frame: .zero)
 
   let demos: [DemoItem] = [
-    DemoItem(name: "Diff Algorithm",
-             viewType: .diffTable)
+    DemoItem(name: "Diff Algorithm", viewType: .diffTable),
+    DemoItem(name: "Supplementary Views", viewType: .supplementaryViews)
   ]
 
   override func viewDidLoad() {
