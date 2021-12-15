@@ -44,7 +44,7 @@ final class DiffTableViewController: UITableViewController {
   }
 
   deinit {
-    print("\(Self.self)")
+    print("Deinit \(Self.self)")
   }
 
   private func setupNavigation() {
@@ -75,12 +75,16 @@ final class DiffTableViewController: UITableViewController {
   private let reuseIdentifier = "cell"
 
   private func setupDataSource() {
-    dataSource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { (tv, index, item) -> UITableViewCell? in
-      let cell = tv.dequeueReusableCell(withIdentifier: self.reuseIdentifier, for: index)
-      cell.textLabel?.text = item.name
-      cell.accessoryType = .disclosureIndicator
-      return cell
+    dataSource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { [weak self] (tableView, index, model) -> UITableViewCell? in
+      return self?.configureCell(tableView: tableView, index: index, model: model)
     })
+  }
+
+  private func configureCell(tableView: UITableView, index: IndexPath, model: Person) -> UITableViewCell? {
+    let cell = tableView.dequeueReusableCell(withIdentifier: self.reuseIdentifier, for: index)
+    cell.textLabel?.text = model.name
+    cell.accessoryType = .disclosureIndicator
+    return cell
   }
 
   private func populatedItems(with model: [Person]) {
