@@ -8,41 +8,41 @@
 import UIKit
 
 class DemosViewController: UIViewController {
-  
+
   let tableView = UITableView(frame: .zero)
-  
+
   let demos: [DemoItem] = [
     DemoItem(name: "Diff Algorithm",
              viewType: .diffTable)
   ]
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     title = "Demos"
     view.addSubview(tableView)
     setupTable()
   }
-  
+
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     tableView.frame = view.bounds
   }
-  
+
   private func setupTable() {
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier) // 1
     tableView.delegate = self
-    
+
     setupDataSource() // 2
     populatedItems() // 3
   }
-  
+
   typealias DataSource = UITableViewDiffableDataSource<Section, DemoItem>
   typealias Snapshot = NSDiffableDataSourceSnapshot<Section, DemoItem>
-  
+
   private var dataSource: DataSource?
-  
+
   private let reuseIdentifier = "reuseTableIdentifier"
-  
+
   private func setupDataSource() {
     dataSource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { (tv, index, item) -> UITableViewCell? in
       let cell = tv.dequeueReusableCell(withIdentifier: self.reuseIdentifier, for: index)
@@ -52,7 +52,7 @@ class DemosViewController: UIViewController {
       return cell
     })
   }
-  
+
   private func populatedItems() {
     var snapshot = Snapshot()
     snapshot.appendSections([.main])
@@ -63,7 +63,7 @@ class DemosViewController: UIViewController {
 
 // MARK: - UITableViewDelegate
 extension DemosViewController: UITableViewDelegate {
-  
+
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let snapshot = dataSource?.snapshot()
     let section = snapshot?.itemIdentifiers(inSection: .main) ?? []
