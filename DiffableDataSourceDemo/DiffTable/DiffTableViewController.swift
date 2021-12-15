@@ -63,8 +63,8 @@ final class DiffTableViewController: UITableViewController {
     populatedItems(with: oldPeople) // 3
   }
 
-  typealias DataSource = UITableViewDiffableDataSource<Section, Person>
-  typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Person>
+  typealias DataSource = UITableViewDiffableDataSource<Int, Person>
+  typealias Snapshot = NSDiffableDataSourceSnapshot<Int, Person>
 
   private var dataSource: DataSource?
 
@@ -81,7 +81,7 @@ final class DiffTableViewController: UITableViewController {
 
   private func populatedItems(with model: [Person]) {
     var snapshot = Snapshot()
-    snapshot.appendSections([.main])
+    snapshot.appendSections([0])
     snapshot.appendItems(model)
     dataSource?.apply(snapshot)
   }
