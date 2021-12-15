@@ -32,8 +32,8 @@ class DemosViewController: UIViewController {
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier) // 1
     tableView.delegate = self
 
-    setupDataSource() // 2
-    populatedItems() // 3
+    setupDataSource()
+    populatedItems()
   }
 
   typealias DataSource = UITableViewDiffableDataSource<Section, DemoItem>
@@ -44,6 +44,9 @@ class DemosViewController: UIViewController {
   private let reuseIdentifier = "reuseTableIdentifier"
 
   private func setupDataSource() {
+    // Here the connection happens.
+    // The Diffable with the global tableView 👇
+    // 2
     dataSource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { (tv, index, item) -> UITableViewCell? in
       let cell = tv.dequeueReusableCell(withIdentifier: self.reuseIdentifier, for: index)
       cell.textLabel?.text = item.name
@@ -57,6 +60,8 @@ class DemosViewController: UIViewController {
     var snapshot = Snapshot()
     snapshot.appendSections([.main])
     snapshot.appendItems(demos)
+
+    // 3
     dataSource?.apply(snapshot)
   }
 }
