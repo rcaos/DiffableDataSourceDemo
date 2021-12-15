@@ -7,29 +7,6 @@
 
 import UIKit
 
-struct DemoItem: Hashable {
-  let name: String
-  let identifier: String
-
-  init(name: String, identifier: String) {
-    self.name = name
-    self.identifier = identifier
-  }
-
-//  func hash(into hasher: inout Hasher) {
-//    hasher.combine(identifier)
-//  }
-
-  static func == (lhs: DemoItem, rhs: DemoItem) -> Bool {
-    return lhs.name == rhs.name &&
-      lhs.identifier == rhs.identifier
-  }
-}
-
-enum Section {
-  case main
-}
-
 class DemosViewController: UIViewController {
 
   let tableView = UITableView(frame: .zero)
@@ -43,12 +20,7 @@ class DemosViewController: UIViewController {
     super.viewDidLoad()
     title = "Demos"
     view.addSubview(tableView)
-
-
-    tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
-
-    setupDataSource()
-    populatedItems()
+    setupTable()
   }
 
   override func viewDidLayoutSubviews() {
@@ -56,14 +28,20 @@ class DemosViewController: UIViewController {
     tableView.frame = view.bounds
   }
 
+  private func setupTable() {
+    tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier) // 1
+    setupDataSource() // 2
+    populatedItems() // 3
+  }
+
   typealias DataSource = UITableViewDiffableDataSource<Section, DemoItem>
   typealias Snapshot = NSDiffableDataSourceSnapshot<Section, DemoItem>
 
-  private var dataSource: DataSource!
+  private var dataSource: DataSource?
 
   private let reuseIdentifier = "tableIdentifier"
 
-  func setupDataSource() {
+  private func setupDataSource() {
     dataSource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { (tv, index, item) -> UITableViewCell? in
       let cell = tv.dequeueReusableCell(withIdentifier: self.reuseIdentifier, for: index)
       cell.textLabel?.text = item.name
@@ -72,10 +50,10 @@ class DemosViewController: UIViewController {
     })
   }
 
-  func populatedItems() {
+  private func populatedItems() {
     var snapshot = Snapshot()
     snapshot.appendSections([.main])
     snapshot.appendItems(demos)
-    dataSource.apply(snapshot)
+    dataSource?.apply(snapshot)
   }
 }
