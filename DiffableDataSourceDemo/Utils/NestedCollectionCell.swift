@@ -40,6 +40,7 @@ final class NestedCollectionCell: UICollectionViewCell {
 
   func setup() {
     collectionView.register(CenterLabelCell.self, forCellWithReuseIdentifier: reuseIdentifierCell)
+    collectionView.delegate = self
     setupDataSource()
   }
 
@@ -66,5 +67,12 @@ final class NestedCollectionCell: UICollectionViewCell {
     let items = (0...quantity).map { $0 }
     snapshot.appendItems(items)
     dataSource?.apply(snapshot)
+  }
+}
+
+extension NestedCollectionCell: UICollectionViewDelegateFlowLayout {
+
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    return CGSize(width: contentView.frame.height, height: contentView.frame.height)
   }
 }

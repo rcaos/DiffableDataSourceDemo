@@ -16,7 +16,7 @@ enum Nested: Hashable {
     case .title:
       return 44
     case .collection:
-      return 120
+      return 100
     }
   }
 }
