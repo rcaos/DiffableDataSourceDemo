@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7710AF02276AC8AE00047647 /* CenterLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7710AF01276AC8AE00047647 /* CenterLabelCell.swift */; };
+		7710AF04276AD3B600047647 /* NestedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7710AF03276AD3B600047647 /* NestedViewController.swift */; };
+		7710AF06276ADE1000047647 /* NestedCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7710AF05276ADE1000047647 /* NestedCollectionCell.swift */; };
+		7710AF08276ADE8500047647 /* Nested.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7710AF07276ADE8500047647 /* Nested.swift */; };
 		777188362766E008005D0E10 /* DiffTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777188352766E008005D0E10 /* DiffTableViewController.swift */; };
 		77F1A8B42766D73800A9933F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F1A8B32766D73800A9933F /* AppDelegate.swift */; };
 		77F1A8B82766D73800A9933F /* DemosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F1A8B72766D73800A9933F /* DemosViewController.swift */; };
@@ -21,6 +25,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7710AF01276AC8AE00047647 /* CenterLabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterLabelCell.swift; sourceTree = "<group>"; };
+		7710AF03276AD3B600047647 /* NestedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedViewController.swift; sourceTree = "<group>"; };
+		7710AF05276ADE1000047647 /* NestedCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedCollectionCell.swift; sourceTree = "<group>"; };
+		7710AF07276ADE8500047647 /* Nested.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nested.swift; sourceTree = "<group>"; };
 		777188352766E008005D0E10 /* DiffTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffTableViewController.swift; sourceTree = "<group>"; };
 		77F1A8B02766D73800A9933F /* DiffableDataSourceDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiffableDataSourceDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77F1A8B32766D73800A9933F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +55,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7710AF09276ADF0A00047647 /* Nested */ = {
+			isa = PBXGroup;
+			children = (
+				7710AF03276AD3B600047647 /* NestedViewController.swift */,
+				7710AF07276ADE8500047647 /* Nested.swift */,
+			);
+			path = Nested;
+			sourceTree = "<group>";
+		};
 		77F1A8A72766D73700A9933F = {
 			isa = PBXGroup;
 			children = (
@@ -71,6 +88,7 @@
 				77FEAC09276A0FDC00E60AF7 /* DemoItem.swift */,
 				77FEAC0B276A211400E60AF7 /* DiffTable */,
 				77FEAC17276A834600E60AF7 /* SupplementaryViews */,
+				7710AF09276ADF0A00047647 /* Nested */,
 				77FEAC14276A7BCD00E60AF7 /* Utils */,
 				77F1A8BC2766D73900A9933F /* Assets.xcassets */,
 				77F1A8BE2766D73900A9933F /* LaunchScreen.storyboard */,
@@ -93,6 +111,8 @@
 			children = (
 				77FEAC12276A7BC900E60AF7 /* LabelCell.swift */,
 				77FEAC18276A918900E60AF7 /* LabelHeaderCell.swift */,
+				7710AF01276AC8AE00047647 /* CenterLabelCell.swift */,
+				7710AF05276ADE1000047647 /* NestedCollectionCell.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -175,13 +195,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7710AF06276ADE1000047647 /* NestedCollectionCell.swift in Sources */,
+				7710AF08276ADE8500047647 /* Nested.swift in Sources */,
 				77FEAC0D276A212800E60AF7 /* Person.swift in Sources */,
 				77FEAC0F276A762400E60AF7 /* SuplementaryViewsController.swift in Sources */,
 				77FEAC13276A7BC900E60AF7 /* LabelCell.swift in Sources */,
 				777188362766E008005D0E10 /* DiffTableViewController.swift in Sources */,
 				77FEAC0A276A0FDC00E60AF7 /* DemoItem.swift in Sources */,
 				77F1A8B82766D73800A9933F /* DemosViewController.swift in Sources */,
+				7710AF04276AD3B600047647 /* NestedViewController.swift in Sources */,
 				77FEAC11276A786E00E60AF7 /* FeedItem.swift in Sources */,
+				7710AF02276AC8AE00047647 /* CenterLabelCell.swift in Sources */,
 				77F1A8B42766D73800A9933F /* AppDelegate.swift in Sources */,
 				77FEAC19276A918900E60AF7 /* LabelHeaderCell.swift in Sources */,
 			);
