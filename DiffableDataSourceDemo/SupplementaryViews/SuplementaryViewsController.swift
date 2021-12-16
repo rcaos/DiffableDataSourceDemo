@@ -32,7 +32,7 @@ class SuplementaryViewsController: UIViewController {
     collectionView.register(LabelCell.self, forCellWithReuseIdentifier: reuseIdentifier) // 1
     collectionView.delegate = self
     setupDataSource()
-    populatedItems()
+    populatedItems(model: feedItems)
   }
 
   typealias DataSource = UICollectionViewDiffableDataSource<SectionFeed, Comment>
@@ -99,10 +99,10 @@ class SuplementaryViewsController: UIViewController {
              comments: ["yoooooooo", "What's the eta?", "Nothing", "Maybe", "Again", "Lose", "Fringe"].map { .init(comment: $0) })
   ]
 
-  private func populatedItems() {
+  private func populatedItems(model: [FeedItem]) {
     var snapshot = Snapshot()
 
-    feedItems.forEach {
+    model.forEach {
       let section = SectionFeed.user(model: $0.user)
       snapshot.appendSections([section])
       snapshot.appendItems($0.comments, toSection: section)
