@@ -75,7 +75,8 @@ class NestedViewController: UIViewController {
 extension NestedViewController: UICollectionViewDelegateFlowLayout {
 
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: collectionView.frame.width, height: 50)
+    let height = dataSource?.itemIdentifier(for: indexPath)?.heightSize() ?? 44
+    return CGSize(width: collectionView.frame.width, height: height)
   }
 }
 
