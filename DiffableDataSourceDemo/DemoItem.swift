@@ -38,6 +38,7 @@ enum Section {
 enum ViewScenes: String {
   case diffTable
   case supplementaryViews
+  case nested
 
   func getInstance() -> UIViewController {
     switch self {
@@ -45,6 +46,8 @@ enum ViewScenes: String {
       return DiffTableViewController()
     case .supplementaryViews:
       return SuplementaryViewsController()
+    case .nested:
+      return NestedViewController()
     }
   }
 }

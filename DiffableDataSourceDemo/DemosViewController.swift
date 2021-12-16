@@ -13,7 +13,8 @@ class DemosViewController: UIViewController {
 
   let demos: [DemoItem] = [
     DemoItem(name: "Diff Algorithm", viewType: .diffTable),
-    DemoItem(name: "Supplementary Views", viewType: .supplementaryViews)
+    DemoItem(name: "Supplementary Views", viewType: .supplementaryViews),
+    DemoItem(name: "Nested", viewType: .nested)
   ]
 
   override func viewDidLoad() {
