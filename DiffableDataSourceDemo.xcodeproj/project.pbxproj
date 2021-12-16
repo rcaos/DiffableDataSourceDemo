@@ -64,6 +64,16 @@
 			path = Nested;
 			sourceTree = "<group>";
 		};
+		7767BCB0276B4E59001BFE3A /* Samples */ = {
+			isa = PBXGroup;
+			children = (
+				77FEAC0B276A211400E60AF7 /* DiffTable */,
+				77FEAC17276A834600E60AF7 /* SupplementaryViews */,
+				7710AF09276ADF0A00047647 /* Nested */,
+			);
+			path = Samples;
+			sourceTree = "<group>";
+		};
 		77F1A8A72766D73700A9933F = {
 			isa = PBXGroup;
 			children = (
@@ -86,9 +96,7 @@
 				77F1A8B32766D73800A9933F /* AppDelegate.swift */,
 				77F1A8B72766D73800A9933F /* DemosViewController.swift */,
 				77FEAC09276A0FDC00E60AF7 /* DemoItem.swift */,
-				77FEAC0B276A211400E60AF7 /* DiffTable */,
-				77FEAC17276A834600E60AF7 /* SupplementaryViews */,
-				7710AF09276ADF0A00047647 /* Nested */,
+				7767BCB0276B4E59001BFE3A /* Samples */,
 				77FEAC14276A7BCD00E60AF7 /* Utils */,
 				77F1A8BC2766D73900A9933F /* Assets.xcassets */,
 				77F1A8BE2766D73900A9933F /* LaunchScreen.storyboard */,
